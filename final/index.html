@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>FitLife — Transform Your Body</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand brand" href="index.html">FitLife</a>
+      <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="workouts.html">Workouts</a></li>
+          <li class="nav-item"><a class="nav-link" href="nutrition.html">Nutrition</a></li>
+          <li class="nav-item"><a class="nav-link" href="motivation.html">Motivation</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><button id="themeToggle" class="btn btn-sm btn-outline-light ms-3">Toggle Theme</button></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero mt-5 section-card">
+      <div class="hero-left">
+        <h1>Transform Your Body,<br/> Transform Your Life</h1>
+        <p class="lead">Personalized workouts, nutrition plans and daily motivation — made simple. Start your journey today.</p>
+        <div>
+          <a href="workouts.html" class="btn btn-cta me-3">Start Your Journey</a>
+          <a href="nutrition.html" class="btn btn-outline-primary">Calculate Calories</a>
+        </div>
+        <div class="cards mt-4">
+          <div class="card-item">
+            <img src="https://images.unsplash.com/photo-1517964101984-48f1b6d1a0b4?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=..." alt="train">
+            <h5>Personal Programs</h5>
+            <p class="mb-0">Custom plans for your goals.</p>
+          </div>
+          <div class="card-item">
+            <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=..." alt="meal">
+            <h5>Nutrition Guides</h5>
+            <p class="mb-0">Healthy recipes and tracking.</p>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right">
+        <img src="https://images.unsplash.com/photo-1546484959-f2fdfb1f0b1a?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=..." alt="fitness">
+      </div>
+    </section>
+
+    <section class="mt-4 section-card">
+      <h3>Popular Workouts</h3>
+      <div class="cards">
+        <div class="card-item">
+          <img src="https://images.unsplash.com/photo-1546484959-f2fdfb1f0b1a?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=..." alt="">
+          <h6>Full Body HIIT</h6>
+        </div>
+        <div class="card-item">
+          <img src="https://images.unsplash.com/photo-1558611848-73f7eb4001d7?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=..." alt="">
+          <h6>Strength & Power</h6>
+        </div>
+        <div class="card-item">
+          <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=..." alt="">
+          <h6>Yoga & Mobility</h6>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© FitLife 2025 — Built for your best self</p>
+    </div>
+  </footer>
+  <!-- MODAL для карточек -->
+<div class="modal fade" id="infoModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="infoTitle"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="infoText"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  <script src="js/main.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/validate.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+$(document).ready(function(){
+
+  
+  $(".hero-left, .hero-right").hide().fadeIn(1000);
+
+ 
+  const cardDescriptions = [
+    "Персональные планы тренировок, составленные под ваши цели, уровень и доступное оборудование.",
+    "Руководства по питанию с советами от диетологов и списками полезных продуктов.",
+    "Программы упражнений для повышения силы, выносливости и гибкости.",
+    "Подборка здоровых блюд и полезных привычек для баланса тела и ума."
+  ];
+
+ 
+  $(".card-item").each(function(index){
+    $(this).on("click", function(){
+      const title = $(this).find("h5").text();
+      const desc = cardDescriptions[index] || "Информация появится позже.";
+      $("#infoTitle").text(title);
+      $("#infoText").text(desc);
+      $("#infoModal").modal("show");
+    });
+  });
+
+  
+  $(".btn-cta").hover(
+    function(){ $(this).css({"transform":"scale(1.05)", "transition":"0.3s"}); },
+    function(){ $(this).css("transform","scale(1)"); }
+  );
+});
+</script>
+
+
+</body>
+</html>
